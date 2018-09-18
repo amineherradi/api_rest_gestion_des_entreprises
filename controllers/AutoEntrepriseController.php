@@ -35,17 +35,13 @@ class AutoEntrepriseController extends RestController
 		echo json_encode($data);
 	}
 
-	public function getSelected_request($ids)
+	public function add_request($post = [])
 	{
-
+		$entreprise = new AutoEntreprise($post);
+		var_dump($entreprise);
 	}
 
-	public function add_request($post)
-	{
-
-	}
-
-	public function update_request($id)
+	public function update_request($id, $post)
 	{
 
 	}

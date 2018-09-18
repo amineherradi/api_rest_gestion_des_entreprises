@@ -9,9 +9,24 @@ if(
 	isset($_GET['entity']) && 
 	in_array($_GET['entity'], $entities)
 ) {
-	$entity = $_GET['entity'].'Controller';
-	$entity = new $entity;
+	$entityController = $_GET['entity'].'Controller';
+	$entityController = new $entityController;
 }
 
-// $entity->getDetail_request($_GET['id']);
-$entity->getAll_request();
+
+
+switch ($_SERVER['REQUEST_METHOD']) {
+	case 'GET':
+		$entityController->getDetail_request($_GET['id']);
+		$entityController->getAll_request();
+		break;
+
+	case 'POST':
+		$entityController->add_request($_POST);
+		$entityController->update_request($_GET['id'], $_POST);
+		break;
+
+	case 'DELETE':
+		$entityController->delete_request($_GET['id']);
+		break;
+}
