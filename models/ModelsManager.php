@@ -98,13 +98,31 @@ class ModelsManager
 		$query->execute();
 	}
 
-	public function update()
+	public function update($id)
 	{
+		$sql = 'UPDATE '.$this->table_name.' SET ';
+		$limit = count($this->fields) - 1;
+		foreach ($this->fields as $key => $field) {
+			$sql.= $field.' = :'.$field;
+			if ($key < $limit) {
+				$sql.= ', ';
+			}
+		}
+		$sql.= ' ';
+		$sql.= 'WHERE entreprise_id = '.$id;
 
+		$query = $this->db->prepare($sql);
+
+		foreach ($this->fields as $key => $field) {
+			$query->bindValue(':'.$field, $this->$field, PDO::PARAM_INT);
+		}
+
+		$query->execute();
 	}
 
-	public function delete()
+	public function delete($id)
 	{
-
+		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$id;
+		$this->db->exec($sql);
 	}
 }

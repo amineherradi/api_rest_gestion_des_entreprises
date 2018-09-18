@@ -133,5 +133,34 @@ class Entreprise extends ModelsManager
 
 		return $objects;
 	}
+
+	public function update($id)
+	{
+		$sql = 'UPDATE '.$this->table_name.' SET ';
+		$limit = count($this->fields) - 1;
+		foreach ($this->fields as $key => $field) {
+			$sql.= $field.' = :'.$field;
+			if ($key < $limit) {
+				$sql.= ', ';
+			}
+		}
+		$sql.= ' ';
+		$sql.= 'WHERE entreprise_id = '.$id.' ';
+		$sql.= 'AND type = "'.$this::TYPE.'"';
+
+		$query = $this->db->prepare($sql);
+
+		foreach ($this->fields as $key => $field) {
+			$query->bindValue(':'.$field, $this->$field, PDO::PARAM_INT);
+		}
+
+		$query->execute();
+	}
+
+	public function delete($id)
+	{
+		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$id.' AND type = "'.$this::TYPE.'"';
+		$this->db->exec($sql);
+	}
 }
 

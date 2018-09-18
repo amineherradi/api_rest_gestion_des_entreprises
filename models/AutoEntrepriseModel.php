@@ -29,12 +29,3 @@ class AutoEntreprise extends Entreprise
 		}
 	}
 }
-
-$data = [
-	'siret' => '362 521 879 00034',
-	'denomination' => 'WebFactory',
-	'chiffre_affaire' => 1200000.26,
-];
-
-$entreprise = new AutoEntreprise($data);
-$entreprise->add();
