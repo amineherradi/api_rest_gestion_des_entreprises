@@ -1,7 +1,5 @@
 <?php
 
-require_once '../config/config.php';
-
 class ModelsManager
 {
 	protected $db;
