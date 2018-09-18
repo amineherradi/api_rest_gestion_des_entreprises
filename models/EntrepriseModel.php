@@ -1,7 +1,7 @@
 <?php
 
 require_once '../lib/Library.php';
-require_once './ModelsManager.php';
+require_once '../models/ModelsManager.php';
 
 class Entreprise extends ModelsManager
 {
