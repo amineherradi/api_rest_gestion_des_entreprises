@@ -17,3 +17,8 @@ Les routes (en attendant la réécriture des URL):
   - REQUEST METHOD DELETE:
     - /index.php?entity={controllerName}&action={controllerMethodName}&id={id}
     - ex. /index.php?entity=AutoEntreprise&action=delete&id=2
+
+@TODO:
+- Nettoyage des données d'hydratation des objets
+- Vérification des valeurs passées au contructeur
+- Vérification des injections url
