@@ -16,6 +16,9 @@ class AutoEntrepriseController extends RestController
 				$data[$attribut] = $entreprise->$getter();
 			}
 		}
+
+		// L'impôt est uniquement calculé, et n'est jamais stocké
+		$data['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
 		echo json_encode($data);
 	}
 
@@ -31,6 +34,9 @@ class AutoEntrepriseController extends RestController
 					$data[$entreprise->getEntrepriseId()][$attribut] = $entreprise->$getter();
 				}
 			}
+
+			// L'impôt est uniquement calculé, et n'est jamais stocké
+			$data[$entreprise->getEntrepriseId()]['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
 		}
 		echo json_encode($data);
 	}
