@@ -82,15 +82,17 @@ class ModelsManager
 
 	public function add()
 	{
+		unset($this->fields['entreprise_id']);
+
 		$sql = 'INSERT INTO '.$this->table_name.' (';
-			$sql.= implode(', ', $this->fields);
+			$sql.= implode(', ', array_keys($this->fields));
 		$sql.= ') VALUES (';
-			$sql.= ':'.implode(', :', $this->fields).'';
+			$sql.= ':'.implode(', :', array_keys($this->fields)).'';
 		$sql.= ')';
 		$query = $this->db->prepare($sql);
 
 		foreach ($this->fields as $key => $field) {
-			$query->bindValue(':'.$field, $this->$field, PDO::PARAM_INT);
+			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
 		}
 
 		$query->execute();
@@ -98,13 +100,17 @@ class ModelsManager
 
 	public function update($id)
 	{
-		$sql = 'UPDATE '.$this->table_name.' SET ';
+		unset($this->fields['entreprise_id']);
+
+		$sql = 'UPDATE '.$this->table_name.' SET ';		
+		$i = 0;
 		$limit = count($this->fields) - 1;
 		foreach ($this->fields as $key => $field) {
-			$sql.= $field.' = :'.$field;
-			if ($key < $limit) {
+			$sql.= $key.' = :'.$key;
+			if ($i < $limit) {
 				$sql.= ', ';
 			}
+			$i++;
 		}
 		$sql.= ' ';
 		$sql.= 'WHERE entreprise_id = '.$id;
@@ -112,7 +118,7 @@ class ModelsManager
 		$query = $this->db->prepare($sql);
 
 		foreach ($this->fields as $key => $field) {
-			$query->bindValue(':'.$field, $this->$field, PDO::PARAM_INT);
+			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
 		}
 
 		$query->execute();

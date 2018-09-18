@@ -38,16 +38,18 @@ class AutoEntrepriseController extends RestController
 	public function add_request($post = [])
 	{
 		$entreprise = new AutoEntreprise($post);
-		var_dump($entreprise);
+		$entreprise->add();
 	}
 
 	public function update_request($id, $post)
 	{
-
+		$entreprise = new AutoEntreprise($post);
+		$entreprise->update($id);
 	}
 
 	public function delete_request($id)
 	{
-
+		$entreprise = new AutoEntreprise;
+		$entreprise->delete($id);
 	}
 }

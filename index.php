@@ -13,20 +13,60 @@ if(
 	$entityController = new $entityController;
 }
 
-
-
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'GET':
-		$entityController->getDetail_request($_GET['id']);
-		$entityController->getAll_request();
+		if (
+			(
+				isset($_GET['action']) && 
+				isset($_GET['id'])
+			) && (
+				$_GET['action'] == 'detail' &&
+				$_GET['id'] != ''
+			)
+		) {
+			$entityController->getDetail_request($_GET['id']);
+		} elseif (
+			(
+				isset($_GET['action']) && 
+				!isset($_GET['id'])
+			) && $_GET['action'] == 'all'
+		) {
+			$entityController->getAll_request();
+		}
 		break;
 
 	case 'POST':
-		$entityController->add_request($_POST);
-		$entityController->update_request($_GET['id'], $_POST);
+		if (
+			(
+				isset($_GET['action']) && 
+				!isset($_GET['id'])
+			) && $_GET['action'] == 'add'
+		) {
+			$entityController->add_request($_POST);
+		} elseif (
+			(
+				isset($_GET['action']) && 
+				isset($_GET['id'])
+			) && (
+				$_GET['action'] == 'update' &&
+				$_GET['id'] != ''
+			)
+		) {
+			$entityController->update_request($_GET['id'], $_POST);
+		}
 		break;
 
 	case 'DELETE':
-		$entityController->delete_request($_GET['id']);
+		if (
+			(
+				isset($_GET['action']) && 
+				isset($_GET['id'])
+			) && (
+				$_GET['action'] == 'delete' &&
+				$_GET['id'] != ''
+			)
+		) {
+			$entityController->delete_request($_GET['id']);
+		}
 		break;
 }

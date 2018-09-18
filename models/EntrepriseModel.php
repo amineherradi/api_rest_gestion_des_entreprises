@@ -136,22 +136,25 @@ class Entreprise extends ModelsManager
 
 	public function update($id)
 	{
+		unset($this->fields['entreprise_id']);
+
 		$sql = 'UPDATE '.$this->table_name.' SET ';
+		$i = 0;
 		$limit = count($this->fields) - 1;
 		foreach ($this->fields as $key => $field) {
-			$sql.= $field.' = :'.$field;
-			if ($key < $limit) {
+			$sql.= $key.' = :'.$key;
+			if ($i < $limit) {
 				$sql.= ', ';
 			}
+			$i++;
 		}
 		$sql.= ' ';
 		$sql.= 'WHERE entreprise_id = '.$id.' ';
 		$sql.= 'AND type = "'.$this::TYPE.'"';
 
 		$query = $this->db->prepare($sql);
-
 		foreach ($this->fields as $key => $field) {
-			$query->bindValue(':'.$field, $this->$field, PDO::PARAM_INT);
+			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
 		}
 
 		$query->execute();

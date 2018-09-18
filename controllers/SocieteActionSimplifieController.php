@@ -38,16 +38,18 @@ class SocieteActionSimplifieController extends RestController
 	public function add_request($post = [])
 	{
 		$entreprise = new SocieteActionSimplifie($post);
-		var_dump($entreprise);
+		$entreprise->add();
 	}
 
 	public function update_request($id, $post)
 	{
-
+		$entreprise = new SocieteActionSimplifie($post);
+		$entreprise->update($id);
 	}
 
 	public function delete_request($id)
 	{
-
+		$entreprise = new SocieteActionSimplifie;
+		$entreprise->delete($id);
 	}
 }
