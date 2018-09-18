@@ -5,6 +5,13 @@ require_once './EntrepriseModel.php';
 
 class AutoEntreprise extends Entreprise
 {
+	public $fields = [
+		'siret',
+		'denomination',
+		'chiffre_affaire',
+		'type',
+	];
+
 	const TYPE = "AE";
 	const TAUX = 0.25;
 
@@ -15,7 +22,6 @@ class AutoEntreprise extends Entreprise
 
 		// Si présence de données, alors on hydrate...
 		if (!empty($data)) {
-			$this->setEntrepriseId((Integer) $data['entreprise_id']);
 			$this->setSiret($data['siret']);
 			$this->setDenomination($data['denomination']);
 			$this->setChiffreAffaire((Float) $data['chiffre_affaire']);
@@ -24,9 +30,11 @@ class AutoEntreprise extends Entreprise
 	}
 }
 
-$entrepriseAE = new AutoEntreprise;
-// $entrepriseAE = $entrepriseAE->getOne(6);
-// $entrepriseAE = $entrepriseAE->getSelected([1,2,3,4,5,6,7,8,9,10]);
-$entrepriseAE = $entrepriseAE->getAll();
+$data = [
+	'siret' => '362 521 879 00034',
+	'denomination' => 'WebFactory',
+	'chiffre_affaire' => 1200000.26,
+];
 
-var_dump($entrepriseAE);
+$entreprise = new AutoEntreprise($data);
+$entreprise->add();

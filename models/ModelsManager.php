@@ -82,17 +82,28 @@ class ModelsManager
 		return $objects;
 	}
 
-	public function add($object)
+	public function add()
+	{
+		$sql = 'INSERT INTO '.$this->table_name.' (';
+			$sql.= implode(', ', $this->fields);
+		$sql.= ') VALUES (';
+			$sql.= ':'.implode(', :', $this->fields).'';
+		$sql.= ')';
+		$query = $this->db->prepare($sql);
+
+		foreach ($this->fields as $key => $field) {
+			$query->bindValue(':'.$field, $this->$field, PDO::PARAM_INT);
+		}
+
+		$query->execute();
+	}
+
+	public function update()
 	{
 
 	}
 
-	public function updateList($object)
-	{
-
-	}
-
-	public function delete($object)
+	public function delete()
 	{
 
 	}
