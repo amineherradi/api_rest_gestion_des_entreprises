@@ -6,10 +6,11 @@ require_once './models/EntrepriseModel.php';
 class AutoEntreprise extends Entreprise
 {
 	public $fields = [
-		'siret',
-		'denomination',
-		'chiffre_affaire',
-		'type',
+		'entreprise_id'   => 'getEntrepriseId',
+		'siret'           => 'getSiret',
+		'denomination'    => 'getDenomination',
+		'chiffre_affaire' => 'getChiffreAffaire',
+		'type'            => 'getType',
 	];
 
 	const TYPE = "AE";
@@ -22,6 +23,9 @@ class AutoEntreprise extends Entreprise
 
 		// Si présence de données, alors on hydrate...
 		if (!empty($data)) {
+			if (isset($data['entreprise_id'])) {
+				$this->setEntrepriseId((Integer) $data['entreprise_id']);
+			}
 			$this->setSiret($data['siret']);
 			$this->setDenomination($data['denomination']);
 			$this->setChiffreAffaire((Float) $data['chiffre_affaire']);

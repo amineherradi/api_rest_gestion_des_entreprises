@@ -6,11 +6,12 @@ require_once './models/EntrepriseModel.php';
 class SocieteActionSimplifie extends Entreprise
 {
 	public $fields = [
-		'siret',
-		'denomination',
-		'adresse_siege_social',
-		'chiffre_affaire',
-		'type',
+		'entreprise_id'        => 'getEntrepriseId',
+		'siret'                => 'getSiret',
+		'denomination'         => 'getDenomination',
+		'adresse_siege_social' => 'getAdresseSiegeSocial',
+		'chiffre_affaire'      => 'getChiffreAffaire',
+		'type'                 => 'getType',
 	];
 
 	protected $adresse_siege_social;
@@ -25,6 +26,9 @@ class SocieteActionSimplifie extends Entreprise
 
 		// Si présence de données, alors on hydrate...
 		if (!empty($data)) {
+			if (isset($data['entreprise_id'])) {
+				$this->setEntrepriseId((Integer) $data['entreprise_id']);
+			}
 			$this->setSiret($data['siret']);
 			$this->setDenomination($data['denomination']);
 			$this->setChiffreAffaire((Float) $data['chiffre_affaire']);

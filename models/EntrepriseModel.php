@@ -85,7 +85,7 @@ class Entreprise extends ModelsManager
 	{
 		$sql = 'SELECT * ';
 		$sql.= 'FROM '.$this->table_name.' ';
-		$sql.= 'WHERE '.$this->table_name.'_id = '.$id;
+		$sql.= 'WHERE '.$this->table_name.'_id = '.$id.' ';
 		$sql.= 'AND type = "'.$this::TYPE.'"';
 
 		$query = $this->db->query($sql);
