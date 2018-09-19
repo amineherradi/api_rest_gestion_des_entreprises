@@ -93,7 +93,7 @@ class ModelsManager
 			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
 		}
 
-		$query->execute();
+		return $query->execute();
 	}
 
 	public function update($id)
@@ -117,12 +117,12 @@ class ModelsManager
 			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
 		}
 
-		$query->execute();
+		return $query->execute();
 	}
 
 	public function delete($id)
 	{
 		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$id;
-		$this->db->exec($sql);
+		return $this->db->exec($sql);
 	}
 }

@@ -44,18 +44,24 @@ class SocieteActionSimplifieController extends RestController
 	public function add_request($post = [])
 	{
 		$entreprise = new SocieteActionSimplifie($post);
-		$entreprise->add();
+		if ($entreprise->add()) {
+			echo "L'entreprise a bien été ajoutée";
+		}
 	}
 
 	public function update_request($id, $patch)
 	{
 		$entreprise = new SocieteActionSimplifie($patch);
-		$entreprise->update($id);
+		if ($entreprise->update($id)){
+			echo "L'entreprise a bien été modifiée";
+		}
 	}
 
 	public function delete_request($id)
 	{
 		$entreprise = new SocieteActionSimplifie;
-		$entreprise->delete($id);
+		if ($entreprise->delete($id)) {
+			echo "L'entreprise a bien été supprimée";
+		}
 	}
 }

@@ -155,13 +155,13 @@ class Entreprise extends ModelsManager
 			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
 		}
 
-		$query->execute();
+		return $query->execute();
 	}
 
 	public function delete($id)
 	{
 		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$id.' AND type = "'.$this::TYPE.'"';
-		$this->db->exec($sql);
+		return $this->db->exec($sql);
 	}
 }
 
