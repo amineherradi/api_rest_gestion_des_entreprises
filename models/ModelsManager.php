@@ -82,8 +82,6 @@ class ModelsManager
 
 	public function add()
 	{
-		unset($this->fields['entreprise_id']);
-
 		$sql = 'INSERT INTO '.$this->table_name.' (';
 			$sql.= implode(', ', array_keys($this->fields));
 		$sql.= ') VALUES (';
@@ -100,8 +98,6 @@ class ModelsManager
 
 	public function update($id)
 	{
-		unset($this->fields['entreprise_id']);
-
 		$sql = 'UPDATE '.$this->table_name.' SET ';		
 		$i = 0;
 		$limit = count($this->fields) - 1;

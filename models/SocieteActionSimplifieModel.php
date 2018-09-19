@@ -6,7 +6,7 @@ require_once './models/EntrepriseModel.php';
 class SocieteActionSimplifie extends Entreprise
 {
 	public $fields = [
-		'entreprise_id'        => 'getEntrepriseId',
+		// 'entreprise_id'        => 'getEntrepriseId',
 		'siret'                => 'getSiret',
 		'denomination'         => 'getDenomination',
 		'adresse_siege_social' => 'getAdresseSiegeSocial',

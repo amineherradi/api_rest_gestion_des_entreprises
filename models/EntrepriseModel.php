@@ -136,8 +136,6 @@ class Entreprise extends ModelsManager
 
 	public function update($id)
 	{
-		unset($this->fields['entreprise_id']);
-
 		$sql = 'UPDATE '.$this->table_name.' SET ';
 		$i = 0;
 		$limit = count($this->fields) - 1;

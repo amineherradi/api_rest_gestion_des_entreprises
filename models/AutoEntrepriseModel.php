@@ -6,7 +6,7 @@ require_once './models/EntrepriseModel.php';
 class AutoEntreprise extends Entreprise
 {
 	public $fields = [
-		'entreprise_id'   => 'getEntrepriseId',
+		// 'entreprise_id'   => 'getEntrepriseId',
 		'siret'           => 'getSiret',
 		'denomination'    => 'getDenomination',
 		'chiffre_affaire' => 'getChiffreAffaire',
