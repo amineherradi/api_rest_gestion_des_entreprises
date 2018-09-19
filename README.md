@@ -8,6 +8,10 @@ Les routes (en attendant la réécriture des URL):
     - /index.php?entity={controllerName}&action={controllerMethodName}&id={id}
     - ex. /index.php?entity=AutoEntreprise&action=detail&id=2
     - ex. /index.php?entity=AutoEntreprise&action=all
+    - Vous retourne aussi le résultat calculé de l'impôt par type d'entreprise
+    - Possibilité d'ajouter une class de TestModel et une class de TestController avec un attribut 
+      $chiffaire_affaire bien qu'il soit déjà présent dans la classe Entreprise.
+  
   
   - REQUEST METHOD POST:
     - /index.php?entity={controllerName}&action={controllerMethodName}
