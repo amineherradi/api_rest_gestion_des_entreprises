@@ -18,7 +18,8 @@ Les routes (en attendant la réécriture des URL):
     - /index.php?entity={controllerName}&action={controllerMethodName}&id={id}
     - ex. /index.php?entity=AutoEntreprise&action=delete&id=2
 
-@TODO:
+@TODO - Features:
 - Nettoyage des données d'hydratation des objets
 - Vérification des valeurs passées au contructeur
 - Vérification des injections url
+- Retourner les codes HTTP en réponse aux requêtes
