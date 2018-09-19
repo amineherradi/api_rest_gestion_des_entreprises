@@ -23,6 +23,7 @@ Les routes (en attendant la réécriture des URL):
 
 Installation:
   - Un fichier SQL est fournis et prêt à être ajouté à votre phpMyAdmin
+    - Avant de l'importer, vous devez créer votre base données.
     - Il peut être ajouté part importation ou en faisant un copier coller de son contenu dans une requête SQL.
   
   - Pour l'installation du programme:
