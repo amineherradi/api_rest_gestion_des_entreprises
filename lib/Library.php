@@ -6,7 +6,7 @@ class Library
 	{
 		$is_valid = true;
 		// Traitement de vérification de la valeur récupérée...
-		if (!is_string($value)) {
+		if (!is_string($value) || $value == '') {
 			return false;
 		}
 
@@ -16,7 +16,7 @@ class Library
 	{
 		$is_valid = true;
 		// Traitement de vérification de la valeur récupérée...
-		if (!is_string($value)) {
+		if (!is_string($value) || $value == '') {
 			return false;
 		}
 		return $is_valid;
@@ -25,7 +25,7 @@ class Library
 	{
 		$is_valid = true;
 		// Traitement de vérification de la valeur récupérée...
-		if (!is_string($value)) {
+		if (!is_string($value) || $value == '') {
 			return false;
 		}
 		return $is_valid;
@@ -34,7 +34,7 @@ class Library
 	{
 		$is_valid = true;
 		// Traitement de vérification de la valeur récupérée...
-		if (!is_float($value)) {
+		if (!is_float($value) || $value == '') {
 			return false;
 		}
 
@@ -45,7 +45,7 @@ class Library
 	{
 		$is_valid = true;
 		// Traitement de vérification de la valeur récupérée...
-		if (!is_integer($value)) {
+		if (!is_integer($value) || $value == '') {
 			return false;
 		}
 

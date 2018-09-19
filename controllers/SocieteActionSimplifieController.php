@@ -47,9 +47,9 @@ class SocieteActionSimplifieController extends RestController
 		$entreprise->add();
 	}
 
-	public function update_request($id, $post)
+	public function update_request($id, $patch)
 	{
-		$entreprise = new SocieteActionSimplifie($post);
+		$entreprise = new SocieteActionSimplifie($patch);
 		$entreprise->update($id);
 	}
 

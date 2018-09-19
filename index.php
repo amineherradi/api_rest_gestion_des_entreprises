@@ -43,7 +43,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
 			) && $_GET['action'] == 'add'
 		) {
 			$entityController->add_request($_POST);
-		} elseif (
+		}
+		break;
+
+	case 'PATCH':
+		if (
 			(
 				isset($_GET['action']) && 
 				isset($_GET['id'])
@@ -52,7 +56,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
 				$_GET['id'] != ''
 			)
 		) {
-			$entityController->update_request($_GET['id'], $_POST);
+			$patch = file_get_contents('php://input');
+			$patch = urldecode($patch);
+			$patch = explode("&", $patch); 
+
+			foreach ($patch as $key => $value) {
+				$value = explode("=", $value);
+				$_PATCH[$value[0]] = $value[1]; 
+			}
+
+			$entityController->update_request($_GET['id'], $_PATCH);
 		}
 		break;
 
