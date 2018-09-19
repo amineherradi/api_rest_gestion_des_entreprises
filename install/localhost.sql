@@ -16,12 +16,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Base de données :  `test_ceetiz`
---
-CREATE DATABASE IF NOT EXISTS `test_ceetiz` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `test_ceetiz`;
-
 -- --------------------------------------------------------
 
 --
@@ -37,29 +31,6 @@ CREATE TABLE `entreprise` (
   `type` varchar(50) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `entreprise`
---
-
-INSERT INTO `entreprise` (`entreprise_id`, `siret`, `denomination`, `adresse_siege_social`, `chiffre_affaire`, `type`, `date_creation`) VALUES
-(1, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'SAS', '2018-09-17 23:47:41'),
-(2, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'SAS', '2018-09-17 23:47:41'),
-(3, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'SAS', '2018-09-17 23:47:41'),
-(4, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'SAS', '2018-09-17 23:47:41'),
-(5, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'SAS', '2018-09-17 23:47:41'),
-(6, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'AE', '2018-09-17 23:47:41'),
-(7, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'AE', '2018-09-17 23:47:41'),
-(8, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'AE', '2018-09-17 23:47:41'),
-(9, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'AE', '2018-09-18 01:01:53'),
-(10, '362 521 879 00034', 'La mutuelle du castor', '13, Avenue Joseph Kessel, 78180, Montigny-le-Bretonneux', '1000000.00', 'AE', '2018-09-17 23:47:41'),
-(11, '362 521 879 00034', 'WebFactory', NULL, '1200000.00', 'AE', '2018-09-18 12:39:50'),
-(14, '000 521 879 00034', 'La bonne compagnie', NULL, '1900000.00', 'AE', '2018-09-18 13:21:50'),
-(16, '362 521 879 00034', 'Entreprise du chef', NULL, '1200000.00', 'AE', '2018-09-18 20:41:17'),
-(17, '362 521 879 00034', 'Entreprise du chef', NULL, '1200000.00', 'AE', '2018-09-18 20:41:49'),
-(18, '362 521 879 00034AAAA', 'Entreprise du chef', NULL, '1200000.00', 'AE', '2018-09-18 20:44:31'),
-(19, '362 521 879 00034', 'Entreprise du chef', NULL, '1200000.00', 'AE', '2018-09-18 20:44:50'),
-(20, '362 521 879 00034', 'Entreprise du chef', NULL, '0.00', 'AE', '2018-09-18 20:45:16');
 
 --
 -- Index pour les tables exportées
