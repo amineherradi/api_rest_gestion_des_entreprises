@@ -23,3 +23,4 @@ Les routes (en attendant la réécriture des URL):
 - Vérification des valeurs passées au contructeur
 - Vérification des injections url
 - Retourner les codes HTTP en réponse aux requêtes
+- Réécrire les URLs
