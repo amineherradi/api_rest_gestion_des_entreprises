@@ -19,8 +19,8 @@ Les routes (en attendant la réécriture des URL):
     - ex. /index.php?entity=AutoEntreprise&action=delete&id=2
 
 @TODO - Features:
-- Nettoyage des données d'hydratation des objets
-- Vérification des valeurs passées au contructeur
-- Vérification des injections url
+- Nettoyage des données d'hydratation des objets (Done)
+- Vérification des valeurs passées au contructeur (Done)
+- Vérification des injections url (Done)
 - Retourner les codes HTTP en réponse aux requêtes
 - Réécrire les URLs
