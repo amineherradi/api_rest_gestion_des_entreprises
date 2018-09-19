@@ -34,7 +34,7 @@ class ModelsManager
 	{
 		$sql = 'SELECT * ';
 		$sql.= 'FROM '.$this->table_name.' ';
-		$sql.= 'WHERE '.$this->table_name.'_id = '.$id;
+		$sql.= 'WHERE '.$this->table_name.'_id = '.$this->db->quote($id);
 
 		$query = $this->db->query($sql);
 		$data = $query->fetch(PDO::FETCH_ASSOC);
@@ -109,7 +109,7 @@ class ModelsManager
 			$i++;
 		}
 		$sql.= ' ';
-		$sql.= 'WHERE entreprise_id = '.$id;
+		$sql.= 'WHERE entreprise_id = '.$this->db->quote($id);
 
 		$query = $this->db->prepare($sql);
 
@@ -122,7 +122,7 @@ class ModelsManager
 
 	public function delete($id)
 	{
-		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$id;
+		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$this->db->quote($id);
 		return $this->db->exec($sql);
 	}
 }

@@ -85,7 +85,7 @@ class Entreprise extends ModelsManager
 	{
 		$sql = 'SELECT * ';
 		$sql.= 'FROM '.$this->table_name.' ';
-		$sql.= 'WHERE '.$this->table_name.'_id = '.$id.' ';
+		$sql.= 'WHERE '.$this->table_name.'_id = '.$this->db->quote($id).' ';
 		$sql.= 'AND type = "'.$this::TYPE.'"';
 
 		$query = $this->db->query($sql);
@@ -101,7 +101,7 @@ class Entreprise extends ModelsManager
 	{
 		$sql = 'SELECT * ';
 		$sql.= 'FROM '.$this->table_name.' ';
-		$sql.= 'WHERE '.$this->table_name.'_id IN ('.implode(",", $ids).') ';
+		$sql.= 'WHERE '.$this->table_name.'_id IN ('.implode(",", array_map('PDO::quote', $ids)).') ';
 		$sql.= 'AND type = "'.$this::TYPE.'"';
 
 		$query = $this->db->query($sql);
@@ -147,7 +147,7 @@ class Entreprise extends ModelsManager
 			$i++;
 		}
 		$sql.= ' ';
-		$sql.= 'WHERE entreprise_id = '.$id.' ';
+		$sql.= 'WHERE entreprise_id = '.$this->db->quote($id).' ';
 		$sql.= 'AND type = "'.$this::TYPE.'"';
 
 		$query = $this->db->prepare($sql);
@@ -160,7 +160,7 @@ class Entreprise extends ModelsManager
 
 	public function delete($id)
 	{
-		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$id.' AND type = "'.$this::TYPE.'"';
+		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$this->db->quote($id).' AND type = "'.$this::TYPE.'"';
 		return $this->db->exec($sql);
 	}
 }
