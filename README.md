@@ -31,7 +31,7 @@ Installation:
     - Il peut être ajouté part importation ou en faisant un copier coller de son contenu dans une requête SQL.
   
   - Pour l'installation du programme:
-    - git clone git@github.com:amineherradi/test_ceetiz.git
+    - git clone git@github.com:amineherradi/api_rest_gestion_des_entreprises.git
   
   - Pour utiliser le programme:
     - Vous pouvez télécharger Postman
