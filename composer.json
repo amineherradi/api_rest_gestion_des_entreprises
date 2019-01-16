@@ -1,5 +1,6 @@
 {
     "require": {
-        "symfony/routing": "3.*"
+        "symfony/routing": "3.*",
+        "consolidation/robo": "^1.4"
     }
 }
