@@ -2,127 +2,127 @@
 
 class ModelsManager
 {
-	protected $db;
-	protected $table_name;
+    protected $db;
+    protected $table_name;
 
-	public function setDb()
-	{
-		$this->db = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-	}
+    public function setDb()
+    {
+        $this->db = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+    }
 
-	public function setTableName($table_name)
-	{
-		$this->table_name = $table_name;
-	}
+    public function setTableName($table_name)
+    {
+        $this->table_name = $table_name;
+    }
 
-	public function getTableName()
-	{
-		return $this->table_name;
-	}
+    public function getTableName()
+    {
+        return $this->table_name;
+    }
 
-	public function getAttributesOf($object)
-	{
-		$entity = [];
-		foreach ($object as $attribut => $value) {
-			$entity[$attribut] = $value;
-		}
+    public function getAttributesOf($object)
+    {
+        $entity = [];
+        foreach ($object as $attribut => $value) {
+            $entity[$attribut] = $value;
+        }
 
-		return $entity;
-	}
+        return $entity;
+    }
 
-	public function getOne($id)
-	{
-		$sql = 'SELECT * ';
-		$sql.= 'FROM '.$this->table_name.' ';
-		$sql.= 'WHERE '.$this->table_name.'_id = '.$this->db->quote($id);
+    public function getOne($id)
+    {
+        $sql = 'SELECT * ';
+        $sql.= 'FROM '.$this->table_name.' ';
+        $sql.= 'WHERE '.$this->table_name.'_id = '.$this->db->quote($id);
 
-		$query = $this->db->query($sql);
-		$data = $query->fetch(PDO::FETCH_ASSOC);
-		
-		$class = get_called_class();
-		$object = new $class($data);
+        $query = $this->db->query($sql);
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        
+        $class = get_called_class();
+        $object = new $class($data);
 
-		return $object;
-	}
+        return $object;
+    }
 
-	public function getSelected($ids = [])
-	{
-		$sql = 'SELECT * ';
-		$sql.= 'FROM '.$this->table_name.' ';
-		$sql.= 'WHERE '.$this->table_name.'_id IN ('.implode(",", $ids).')';
+    public function getSelected($ids = [])
+    {
+        $sql = 'SELECT * ';
+        $sql.= 'FROM '.$this->table_name.' ';
+        $sql.= 'WHERE '.$this->table_name.'_id IN ('.implode(",", $ids).')';
 
-		$query = $this->db->query($sql);
+        $query = $this->db->query($sql);
 
-		$objects = [];
-		$class = get_called_class();
-		while ($data = $query->fetch(PDO::FETCH_ASSOC))
-		{
-			$objects[] = new $class($data);
-		}
+        $objects = [];
+        $class = get_called_class();
+        while ($data = $query->fetch(PDO::FETCH_ASSOC))
+        {
+            $objects[] = new $class($data);
+        }
 
-		return $objects;
-	}
+        return $objects;
+    }
 
-	public function getAll()
-	{
-		$sql = 'SELECT * ';
-		$sql.= 'FROM '.$this->table_name.' ';
+    public function getAll()
+    {
+        $sql = 'SELECT * ';
+        $sql.= 'FROM '.$this->table_name.' ';
 
-		$query = $this->db->query($sql);
+        $query = $this->db->query($sql);
 
-		$objects = [];
-		$class = get_called_class();
-		while ($data = $query->fetch(PDO::FETCH_ASSOC))
-		{
-			$objects[] = new $class($data);
-		}
+        $objects = [];
+        $class = get_called_class();
+        while ($data = $query->fetch(PDO::FETCH_ASSOC))
+        {
+            $objects[] = new $class($data);
+        }
 
-		return $objects;
-	}
+        return $objects;
+    }
 
-	public function add()
-	{
-		$sql = 'INSERT INTO '.$this->table_name.' (';
-			$sql.= implode(', ', array_keys($this->fields));
-		$sql.= ') VALUES (';
-			$sql.= ':'.implode(', :', array_keys($this->fields)).'';
-		$sql.= ')';
-		$query = $this->db->prepare($sql);
+    public function add()
+    {
+        $sql = 'INSERT INTO '.$this->table_name.' (';
+            $sql.= implode(', ', array_keys($this->fields));
+        $sql.= ') VALUES (';
+            $sql.= ':'.implode(', :', array_keys($this->fields)).'';
+        $sql.= ')';
+        $query = $this->db->prepare($sql);
 
-		foreach ($this->fields as $key => $field) {
-			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
-		}
+        foreach ($this->fields as $key => $field) {
+            $query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
+        }
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
-	public function update($id)
-	{
-		$sql = 'UPDATE '.$this->table_name.' SET ';		
-		$i = 0;
-		$limit = count($this->fields) - 1;
-		foreach ($this->fields as $key => $field) {
-			$sql.= $key.' = :'.$key;
-			if ($i < $limit) {
-				$sql.= ', ';
-			}
-			$i++;
-		}
-		$sql.= ' ';
-		$sql.= 'WHERE entreprise_id = '.$this->db->quote($id);
+    public function update($id)
+    {
+        $sql = 'UPDATE '.$this->table_name.' SET ';     
+        $i = 0;
+        $limit = count($this->fields) - 1;
+        foreach ($this->fields as $key => $field) {
+            $sql.= $key.' = :'.$key;
+            if ($i < $limit) {
+                $sql.= ', ';
+            }
+            $i++;
+        }
+        $sql.= ' ';
+        $sql.= 'WHERE entreprise_id = '.$this->db->quote($id);
 
-		$query = $this->db->prepare($sql);
+        $query = $this->db->prepare($sql);
 
-		foreach ($this->fields as $key => $field) {
-			$query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
-		}
+        foreach ($this->fields as $key => $field) {
+            $query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
+        }
 
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
-	public function delete($id)
-	{
-		$sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$this->db->quote($id);
-		return $this->db->exec($sql);
-	}
+    public function delete($id)
+    {
+        $sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$this->db->quote($id);
+        return $this->db->exec($sql);
+    }
 }

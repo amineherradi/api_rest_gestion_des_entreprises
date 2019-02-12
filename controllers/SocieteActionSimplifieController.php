@@ -5,63 +5,63 @@ require_once './models/SocieteActionSimplifieModel.php';
 
 class SocieteActionSimplifieController extends RestController
 {
-	public function getDetail_request($id)
-	{
-		$entreprise = new SocieteActionSimplifie;
-		$entreprise = $entreprise->getOne($id);
+    public function getDetail_request($id)
+    {
+        $entreprise = new SocieteActionSimplifie;
+        $entreprise = $entreprise->getOne($id);
 
-		$data = [];
-		foreach ($entreprise->fields as $attribut => $getter) {
-			if(array_key_exists($attribut, $entreprise->fields)) {
-				$data[$attribut] = $entreprise->$getter();
-			}
-		}
+        $data = [];
+        foreach ($entreprise->fields as $attribut => $getter) {
+            if(array_key_exists($attribut, $entreprise->fields)) {
+                $data[$attribut] = $entreprise->$getter();
+            }
+        }
 
-		// L'impôt est uniquement calculé, et n'est jamais stocké
-		$data['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
-		echo json_encode($data);
-	}
+        // L'impôt est uniquement calculé, et n'est jamais stocké
+        $data['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
+        echo json_encode($data);
+    }
 
-	public function getAll_request()
-	{
-		$entreprises = new SocieteActionSimplifie;
-		$entreprises = $entreprises->getAll();
+    public function getAll_request()
+    {
+        $entreprises = new SocieteActionSimplifie;
+        $entreprises = $entreprises->getAll();
 
-		foreach ($entreprises as $key => $entreprise) {
-			$data[$entreprise->getEntrepriseId()] = [];
-			foreach ($entreprise->fields as $attribut => $getter) {
-				if(array_key_exists($attribut, $entreprise->fields)) {
-					$data[$entreprise->getEntrepriseId()][$attribut] = $entreprise->$getter();
-				}
-			}
+        foreach ($entreprises as $key => $entreprise) {
+            $data[$entreprise->getEntrepriseId()] = [];
+            foreach ($entreprise->fields as $attribut => $getter) {
+                if(array_key_exists($attribut, $entreprise->fields)) {
+                    $data[$entreprise->getEntrepriseId()][$attribut] = $entreprise->$getter();
+                }
+            }
 
-			// L'impôt est uniquement calculé, et n'est jamais stocké
-			$data[$entreprise->getEntrepriseId()]['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
-		}
-		echo json_encode($data);
-	}
+            // L'impôt est uniquement calculé, et n'est jamais stocké
+            $data[$entreprise->getEntrepriseId()]['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
+        }
+        echo json_encode($data);
+    }
 
-	public function add_request($post = [])
-	{
-		$entreprise = new SocieteActionSimplifie($post);
-		if ($entreprise->add()) {
-			echo "L'entreprise a bien été ajoutée";
-		}
-	}
+    public function add_request($post = [])
+    {
+        $entreprise = new SocieteActionSimplifie($post);
+        if ($entreprise->add()) {
+            echo "L'entreprise a bien été ajoutée";
+        }
+    }
 
-	public function update_request($id, $patch)
-	{
-		$entreprise = new SocieteActionSimplifie($patch);
-		if ($entreprise->update($id)){
-			echo "L'entreprise a bien été modifiée";
-		}
-	}
+    public function update_request($id, $patch)
+    {
+        $entreprise = new SocieteActionSimplifie($patch);
+        if ($entreprise->update($id)){
+            echo "L'entreprise a bien été modifiée";
+        }
+    }
 
-	public function delete_request($id)
-	{
-		$entreprise = new SocieteActionSimplifie;
-		if ($entreprise->delete($id)) {
-			echo "L'entreprise a bien été supprimée";
-		}
-	}
+    public function delete_request($id)
+    {
+        $entreprise = new SocieteActionSimplifie;
+        if ($entreprise->delete($id)) {
+            echo "L'entreprise a bien été supprimée";
+        }
+    }
 }
