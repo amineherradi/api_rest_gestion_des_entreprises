@@ -18,5 +18,4 @@ install:
   - travis_retry composer update
 
 script:
-  - vendor/bin/phpunit --coverage-text
   - vendor/bin/phpcs --standard=PSR2 --exclude=Squiz.Classes.ValidClassName -n src/
