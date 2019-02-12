@@ -1,5 +1,6 @@
 # API Rest - Gestion des entreprises
-[![Build Status](https://travis-ci.org/amineherradi/api_rest_gestion_des_entreprises.svg?branch=master)]
+
+[![Build Status](https://travis-ci.org/amineherradi/api_rest_gestion_des_entreprises.svg?branch=master)](https://travis-ci.org/amineherradi/api_rest_gestion_des_entreprises)
 
 Service Web (API REST) permettant de gérer (voir, ajouter, modifier, supprimer) plusieurs types d'entreprises mais aussi de calculer l'impôt dû pour chacune d'entre elles.
 
