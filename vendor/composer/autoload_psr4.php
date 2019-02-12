@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Contracts\\' => array($vendorDir . '/symfony/contracts'),
@@ -24,6 +26,8 @@ return array(
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'Grasmash\\YamlExpander\\' => array($vendorDir . '/grasmash/yaml-expander/src'),
     'Grasmash\\Expander\\' => array($vendorDir . '/grasmash/expander/src'),
+    'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'Consolidation\\OutputFormatters\\' => array($vendorDir . '/consolidation/output-formatters/src'),
     'Consolidation\\Log\\' => array($vendorDir . '/consolidation/log/src'),
     'Consolidation\\Config\\' => array($vendorDir . '/consolidation/config/src'),
