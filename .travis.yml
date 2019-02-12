@@ -1,1 +1,4 @@
 language: php
+env:
+  - TEST_SUITE=units
+  - TEST_SUITE=integration
