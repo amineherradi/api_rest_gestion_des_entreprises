@@ -1,0 +1,21 @@
+dist: trusty
+language: php
+
+matrix:
+  include:
+    - php: 7.2
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - composer install --prefer-dist
+
+install:
+  - travis_retry composer update
+
+script:
+  - vendor/bin/phpcs --standard=PSR2 ../api_rest_gestion_des_entreprises --ignore=*/vendor/*
