@@ -4,31 +4,22 @@ namespace Models;
 
 class AutoEntreprise extends Entreprise
 {
-    public $fields = [
-        // 'entreprise_id'   => 'getEntrepriseId',
-        'siret'           => 'getSiret',
-        'denomination'    => 'getDenomination',
-        'chiffre_affaire' => 'getChiffreAffaire',
-        'type'            => 'getType',
-    ];
-
     const TYPE = "AE";
     const TAUX = 0.25;
 
-    public function __construct($data = [], $tableName = self::TABLE_NAME)
+    /**
+     * AutoEntreprise constructor.
+     * @param array $data
+     */
+    public function __construct(array $data = [])
     {
-        $this->setTableName($tableName);
-        $this->setDb();
-
-        // Si présence de données, alors on hydrate...
+        $this->tableName = $this::TABLE_NAME;
         if (!empty($data)) {
-            if (isset($data['entreprise_id'])) {
-                $this->setEntrepriseId((Integer) $data['entreprise_id']);
-            }
-            $this->setSiret($data['siret']);
-            $this->setDenomination($data['denomination']);
-            $this->setChiffreAffaire((Float) $data['chiffre_affaire']);
-            $this->setType();
+            $this->entrepriseId = (isset($data['entreprise_id']))? $data['entreprise_id']:"";
+            $this->siret = $data['siret'];
+            $this->denomination = $data['denomination'];
+            $this->chiffreAffaire = $data['chiffre_affaire'];
+            $this->type = $this::TYPE;
         }
     }
 }

@@ -2,30 +2,33 @@
 
 namespace Controllers;
 
+use Models\AutoEntreprise;
+
 class AutoEntrepriseController extends RestController
 {
-    /***/
+    /** @var AutoEntreprise $entreprise */
     private $entreprise;
 
     public function getDetail_request($id)
     {
-        $entreprise = new AutoEntreprise;
-        $entreprise = $entreprise->getOne($id);
+        $this->entreprise = new AutoEntreprise;
+        $this->entreprise = $this->entreprise->getOne($id);
 
         $data = [];
-        foreach ($entreprise->fields as $attribut => $getter) {
-            if(array_key_exists($attribut, $entreprise->fields)) {
-                $data[$attribut] = $entreprise->$getter();
+        foreach ($this->entreprise as $attribut => $getter) {
+            if(array_key_exists($attribut, $this->entreprise->fields)) {
+                $data[$attribut] = $this->entreprise->$getter();
             }
         }
 
         // L'impôt est uniquement calculé, et n'est jamais stocké
-        $data['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
+        $data['impot'] = $this->entreprise->getChiffreAffaire() * $this->entreprise::TAUX;
         echo json_encode($data);
     }
 
     public function getAll_request()
     {
+        $data = [];
         $entreprises = new AutoEntreprise;
         $entreprises = $entreprises->getAll();
 

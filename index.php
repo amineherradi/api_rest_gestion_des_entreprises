@@ -31,6 +31,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'PATCH':
+        $_PATCH = [];
         if ((isset($_GET['action']) && isset($_GET['id'])) && ($_GET['action'] == 'update' && $_GET['id'] != '')) {
             $patch = file_get_contents('php://input');
             $patch = urldecode($patch);

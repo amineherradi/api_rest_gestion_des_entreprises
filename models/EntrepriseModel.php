@@ -4,7 +4,7 @@ namespace Models;
 
 use Exception;
 use Lib\Validators;
-use PDO;
+use phpDocumentor\Reflection\Types\Integer;
 
 abstract class Entreprise extends ModelsManager
 {
@@ -12,7 +12,7 @@ abstract class Entreprise extends ModelsManager
 
     const TABLE_NAME = "entreprise";
 
-    /** @var integer $entrepriseId */
+    /** @var int $entrepriseId */
     protected $entrepriseId;
     /** @var string $siret */
     protected $siret;
@@ -20,13 +20,13 @@ abstract class Entreprise extends ModelsManager
     protected $denomination;
     /** @var float $chiffreAffaire */
     protected $chiffreAffaire;
-    /** @var string */
+    /** @var string $type */
     protected $type;
+    /** @var float $taux */
+    protected $taux;
 
-    /**
-     * @return int
-     */
-    public function getEntrepriseId()
+    /** @return int */
+    public function getEntrepriseId(): int
     {
         return $this->entrepriseId;
     }
@@ -35,7 +35,7 @@ abstract class Entreprise extends ModelsManager
      * @param $id
      * @throws Exception
      */
-    public function setEntrepriseId($id)
+    public function setEntrepriseId($id): void
     {
         if ($this->isValidId($id)){
             $this->entrepriseId = $id;
@@ -44,10 +44,8 @@ abstract class Entreprise extends ModelsManager
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getSiret()
+    /** @return string */
+    public function getSiret(): string
     {
         return $this->siret;
     }
@@ -56,7 +54,7 @@ abstract class Entreprise extends ModelsManager
      * @param $siret
      * @throws Exception
      */
-    public function setSiret($siret)
+    public function setSiret($siret): void
     {
         if ($this->isValidSiret($siret)) {
             $this->siret = $siret;
@@ -65,10 +63,8 @@ abstract class Entreprise extends ModelsManager
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getDenomination()
+    /** @return string */
+    public function getDenomination(): string
     {
         return $this->denomination;
     }
@@ -77,7 +73,7 @@ abstract class Entreprise extends ModelsManager
      * @param $denomination
      * @throws Exception
      */
-    public function setDenomination($denomination)
+    public function setDenomination($denomination): void
     {
         if ($this->isValidDenomination($denomination)) {
             $this->denomination = $denomination;
@@ -86,10 +82,8 @@ abstract class Entreprise extends ModelsManager
         }
     }
 
-    /**
-     * @return float
-     */
-    public function getChiffreAffaire()
+    /** @return float */
+    public function getChiffreAffaire(): float
     {
         return $this->chiffreAffaire;
     }
@@ -98,7 +92,7 @@ abstract class Entreprise extends ModelsManager
      * @param $chiffre_affaire
      * @throws Exception
      */
-    public function setChiffreAffaire($chiffre_affaire)
+    public function setChiffreAffaire($chiffre_affaire): void
     {
         if ($this->isValidChiffreAffaire($chiffre_affaire)) {
             $this->chiffreAffaire = $chiffre_affaire;
@@ -107,96 +101,63 @@ abstract class Entreprise extends ModelsManager
         }
     }
 
-    public function getType()
+    /** @return float */
+    public function getTaux(): float
     {
-        return $this->type;
+        return $this->taux;
     }
 
-    public function setType()
+    /**
+     * @param float $taux
+     * @return void
+     */
+    public function setTaux($taux): void
     {
-        $this->type = $this::TYPE;
+        $this->taux = $taux;
     }
 
     // Mes surcharges
-    public function getOne($id)
+
+    /**
+     * @param Integer $id
+     * @return bool
+     */
+    public function getOne($id): bool
     {
-        $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->tableName.' ';
-        $sql.= 'WHERE '.$this->tableName.'_id = '.$this->db->quote($id).' ';
-        $sql.= 'AND type = "'.$this->type.'"';
-
-        $query = $this->db->query($sql);
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        
-        $class = get_called_class();
-        $object = new $class($data);
-
-        return $object;
+        return ($id) ? true : false;
     }
 
-    public function getSelected($ids = [])
+    /**
+     * @param array $ids
+     * @return array
+     */
+    public function getSelected(array $ids = []): array
     {
-        $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->tableName.' ';
-        $sql.= 'WHERE '.$this->tableName.'_id IN ('.implode(",", array_map('PDO::quote', $ids)).') ';
-        $sql.= 'AND type = "'.$this->type.'"';
-
-        $query = $this->db->query($sql);
-
-        $objects = [];
-        $class = get_called_class();
-        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-            $objects[] = new $class($data);
-        }
-
-        return $objects;
+        return ($ids)? [] : [];
     }
 
-    public function getAll()
+    /** @return array */
+    public function getAll(): array
     {
-        $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->tableName.' ';
-        $sql.= 'WHERE type = "'.$this->type.'"';
-
-        $query = $this->db->query($sql);
-
-        $objects = [];
-        $class = get_called_class();
-        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-            $objects[] = new $class($data);
-        }
-
-        return $objects;
+        return [];
     }
 
-    public function update($id)
+    /**
+     * @param Integer $id
+     * @return bool
+     */
+    public function update(Integer $id): bool
     {
-        $sql = 'UPDATE '.$this->tableName.' SET ';
-        $i = 0;
-        $limit = count($this->fields) - 1;
-        foreach ($this as $key => $field) {
-            $sql.= $key.' = :'.$key;
-            if ($i < $limit) {
-                $sql.= ', ';
-            }
-            $i++;
-        }
-        $sql.= ' ';
-        $sql.= 'WHERE entreprise_id = '.$this->db->quote($id).' ';
-        $sql.= 'AND type = "'.$this->type.'"';
-
-        $query = $this->db->prepare($sql);
-        foreach ($this as $key => $field) {
-            $query->bindValue(':'.$key, $this->$key, PDO::PARAM_INT);
-        }
-
-        return $query->execute();
+        return ($id)? true : false;
     }
 
-    public function delete($id)
+    /**
+     * @param Integer $id
+     * @return bool
+     */
+    public function delete(Integer $id): bool
     {
-        $sql = 'DELETE FROM '.$this->tableName.' WHERE entreprise_id = '.$this->db->quote($id).' AND type = "'.$this->type.'"';
-        return $this->db->exec($sql);
+        return ($id)? true : false;
     }
 }
 

@@ -3,6 +3,7 @@
 namespace Models;
 
 use PDO;
+use phpDocumentor\Reflection\Types\Integer;
 
 class ModelsManager
 {
@@ -11,124 +12,70 @@ class ModelsManager
     /** @var string $tableName */
     protected $tableName;
 
-    public function setDb()
+    protected function setDb()
     {
         $this->db = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
     }
 
-    public function setTableName($table_name)
-    {
-        $this->tableName = $table_name;
-    }
-
-    public function getTableName()
-    {
-        return $this->tableName;
-    }
-
+    /**
+     * @param $object
+     * @return array
+     */
     public function getAttributesOf($object)
     {
         $entity = [];
         foreach ($object as $attribut => $value) {
             $entity[$attribut] = $value;
         }
-
         return $entity;
     }
 
+    /**
+     * @param $id
+     * @return bool;
+     */
     public function getOne($id)
     {
-        $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->tableName.' ';
-        $sql.= 'WHERE '.$this->tableName.'_id = '.$this->db->quote($id);
-
-        $query = $this->db->query($sql);
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        
-        $class = get_called_class();
-        $object = new $class($data);
-
-        return $object;
+        return ($id)? true : false;
     }
 
-    public function getSelected($ids = [])
+    /**
+     * @param array $ids
+     * @return array
+     */
+    public function getSelected(array $ids = [])
     {
-        $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->tableName.' ';
-        $sql.= 'WHERE '.$this->tableName.'_id IN ('.implode(",", $ids).')';
-
-        $query = $this->db->query($sql);
-
-        $objects = [];
-        $class = get_called_class();
-        while ($data = $query->fetch(PDO::FETCH_ASSOC))
-        {
-            $objects[] = new $class($data);
-        }
-
-        return $objects;
+        return ($ids)? [] :[];
     }
 
+    /** @return array */
     public function getAll()
     {
-        $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->tableName.' ';
-
-        $query = $this->db->query($sql);
-
-        $objects = [];
-        $class = get_called_class();
-        while ($data = $query->fetch(PDO::FETCH_ASSOC))
-        {
-            $objects[] = new $class($data);
-        }
-
-        return $objects;
+        return [];
     }
 
+    /** @return bool */
     public function add()
     {
-        $sql = 'INSERT INTO '.$this->tableName.' (';
-            $sql.= implode(', ', array_keys($this->fields));
-        $sql.= ') VALUES (';
-            $sql.= ':'.implode(', :', array_keys($this->fields)).'';
-        $sql.= ')';
-        $query = $this->db->prepare($sql);
-
-        foreach ($this->fields as $key => $field) {
-            $query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
-        }
-
-        return $query->execute();
+        return true;
     }
 
-    public function update($id)
+    /**
+     * @param Integer $id
+     * @return bool
+     */
+    public function update(Integer $id)
     {
-        $sql = 'UPDATE '.$this->tableName.' SET ';
-        $i = 0;
-        $limit = count($this->fields) - 1;
-        foreach ($this->fields as $key => $field) {
-            $sql.= $key.' = :'.$key;
-            if ($i < $limit) {
-                $sql.= ', ';
-            }
-            $i++;
-        }
-        $sql.= ' ';
-        $sql.= 'WHERE entreprise_id = '.$this->db->quote($id);
 
-        $query = $this->db->prepare($sql);
-
-        foreach ($this->fields as $key => $field) {
-            $query->bindValue(':'.$key, $this->$field(), PDO::PARAM_INT);
-        }
-
-        return $query->execute();
+        return ($id)? true : false;
     }
 
-    public function delete($id)
+    /**
+     * @param Integer $id
+     * @return int
+     */
+    public function delete(Integer $id)
     {
-        $sql = 'DELETE FROM '.$this->tableName.' WHERE entreprise_id = '.$this->db->quote($id);
-        return $this->db->exec($sql);
+        return ($id)? true : false;
     }
 }

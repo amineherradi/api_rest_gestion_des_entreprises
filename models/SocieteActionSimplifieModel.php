@@ -12,7 +12,11 @@ class SocieteActionSimplifie extends Entreprise
     /** @var string $adresseSiegeSocial */
     protected $adresseSiegeSocial;
 
-    public function __construct($data = [])
+    /**
+     * SocieteActionSimplifie constructor.
+     * @param array $data
+     */
+    public function __construct(array $data = [])
     {
         $this->tableName = $this::TABLE_NAME;
         if (!empty($data)) {
@@ -25,10 +29,8 @@ class SocieteActionSimplifie extends Entreprise
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getAdresseSiegeSocial()
+    /** @return string */
+    public function getAdresseSiegeSocial(): string
     {
         return $this->adresseSiegeSocial;
     }
@@ -37,7 +39,7 @@ class SocieteActionSimplifie extends Entreprise
      * @param $adresseSiegeSocial
      * @throws Exception
      */
-    public function setAdresseSiegeSociale($adresseSiegeSocial)
+    public function setAdresseSiegeSociale($adresseSiegeSocial): void
     {
         if ($this->isValidAddress($adresseSiegeSocial)) {
             $this->adresseSiegeSocial = $adresseSiegeSocial;
