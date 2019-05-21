@@ -22,4 +22,4 @@ install:
   - travis_retry composer update
 
 script:
-  - vendor/bin/phpcs --standard=PSR1,PSR2,PSR4 ../api_rest_gestion_des_entreprises --ignore=*/vendor/*
+  - vendor/bin/phpcs --standard=PSR1,PSR2 ../api_rest_gestion_des_entreprises --ignore=*/vendor/*
