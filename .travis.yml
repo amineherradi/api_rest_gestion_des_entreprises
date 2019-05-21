@@ -9,7 +9,7 @@ matrix:
     - php: 7.2
     - php: 7.3
 
-sudo: false
+sudo: true
 
 cache:
   directories:
