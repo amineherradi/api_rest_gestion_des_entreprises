@@ -160,4 +160,3 @@ abstract class Entreprise extends ModelsManager
         return ($id)? true : false;
     }
 }
-
