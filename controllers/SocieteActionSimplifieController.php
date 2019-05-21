@@ -1,7 +1,6 @@
 <?php
 
-require_once './controllers/RestController.php';
-require_once './models/SocieteActionSimplifieModel.php';
+namespace Controllers;
 
 class SocieteActionSimplifieController extends RestController
 {

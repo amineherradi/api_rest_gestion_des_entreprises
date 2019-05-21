@@ -1,7 +1,6 @@
 <?php
 
-require_once './lib/Library.php';
-require_once './models/EntrepriseModel.php';
+namespace Models;
 
 class AutoEntreprise extends Entreprise
 {

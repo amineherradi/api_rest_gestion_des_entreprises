@@ -1,5 +1,7 @@
 <?php
 
+namespace Controllers;
+
 class RestController {
     const GET    = "GET";
     const POST   = "POST";

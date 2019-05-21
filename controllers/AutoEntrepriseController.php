@@ -1,10 +1,12 @@
 <?php
 
-require_once './controllers/RestController.php';
-require_once './models/AutoEntrepriseModel.php';
+namespace Controllers;
 
 class AutoEntrepriseController extends RestController
 {
+    /***/
+    private $entreprise;
+
     public function getDetail_request($id)
     {
         $entreprise = new AutoEntreprise;

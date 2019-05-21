@@ -1,9 +1,15 @@
 <?php
 
+namespace Models;
+
+use PDO;
+
 class ModelsManager
 {
+    /** @var PDO $db */
     protected $db;
-    protected $table_name;
+    /** @var string $tableName */
+    protected $tableName;
 
     public function setDb()
     {
@@ -12,12 +18,12 @@ class ModelsManager
 
     public function setTableName($table_name)
     {
-        $this->table_name = $table_name;
+        $this->tableName = $table_name;
     }
 
     public function getTableName()
     {
-        return $this->table_name;
+        return $this->tableName;
     }
 
     public function getAttributesOf($object)
@@ -33,8 +39,8 @@ class ModelsManager
     public function getOne($id)
     {
         $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->table_name.' ';
-        $sql.= 'WHERE '.$this->table_name.'_id = '.$this->db->quote($id);
+        $sql.= 'FROM '.$this->tableName.' ';
+        $sql.= 'WHERE '.$this->tableName.'_id = '.$this->db->quote($id);
 
         $query = $this->db->query($sql);
         $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -48,8 +54,8 @@ class ModelsManager
     public function getSelected($ids = [])
     {
         $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->table_name.' ';
-        $sql.= 'WHERE '.$this->table_name.'_id IN ('.implode(",", $ids).')';
+        $sql.= 'FROM '.$this->tableName.' ';
+        $sql.= 'WHERE '.$this->tableName.'_id IN ('.implode(",", $ids).')';
 
         $query = $this->db->query($sql);
 
@@ -66,7 +72,7 @@ class ModelsManager
     public function getAll()
     {
         $sql = 'SELECT * ';
-        $sql.= 'FROM '.$this->table_name.' ';
+        $sql.= 'FROM '.$this->tableName.' ';
 
         $query = $this->db->query($sql);
 
@@ -82,7 +88,7 @@ class ModelsManager
 
     public function add()
     {
-        $sql = 'INSERT INTO '.$this->table_name.' (';
+        $sql = 'INSERT INTO '.$this->tableName.' (';
             $sql.= implode(', ', array_keys($this->fields));
         $sql.= ') VALUES (';
             $sql.= ':'.implode(', :', array_keys($this->fields)).'';
@@ -98,7 +104,7 @@ class ModelsManager
 
     public function update($id)
     {
-        $sql = 'UPDATE '.$this->table_name.' SET ';     
+        $sql = 'UPDATE '.$this->tableName.' SET ';
         $i = 0;
         $limit = count($this->fields) - 1;
         foreach ($this->fields as $key => $field) {
@@ -122,7 +128,7 @@ class ModelsManager
 
     public function delete($id)
     {
-        $sql = 'DELETE FROM '.$this->table_name.' WHERE entreprise_id = '.$this->db->quote($id);
+        $sql = 'DELETE FROM '.$this->tableName.' WHERE entreprise_id = '.$this->db->quote($id);
         return $this->db->exec($sql);
     }
 }
