@@ -2,39 +2,46 @@
 
 namespace Controllers;
 
+use Models\SocieteActionSimplifie;
+
 class SocieteActionSimplifieController extends RestController
 {
+    /** @var SocieteActionSimplifie $entreprise */
+    private $entreprise;
+    /** @var SocieteActionSimplifie $entreprises */
+    private $entreprises;
+
     public function getDetail_request($id)
     {
-        $entreprise = new SocieteActionSimplifie;
-        $entreprise = $entreprise->getOne($id);
+        $this->entreprise = new SocieteActionSimplifie;
+        $this->entreprise = $this->entreprise->getOne($id);
 
         $data = [];
-        foreach ($entreprise->fields as $attribut => $getter) {
-            if(array_key_exists($attribut, $entreprise->fields)) {
-                $data[$attribut] = $entreprise->$getter();
-            }
+        foreach ($this->entreprise as $attribut => $getter) {
+            $data[$attribut] = $this->entreprise->$getter();
         }
 
         // L'impôt est uniquement calculé, et n'est jamais stocké
-        $data['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
+        $data['impot'] = $this->entreprise->getChiffreAffaire() * $this->entreprise::TAUX;
         echo json_encode($data);
     }
 
     public function getAll_request()
     {
-        $entreprises = new SocieteActionSimplifie;
-        $entreprises = $entreprises->getAll();
+        $this->entreprises = new SocieteActionSimplifie;
+        $this->entreprises = $this->entreprise->getAll();
 
-        foreach ($entreprises as $key => $entreprise) {
-            $data[$entreprise->getEntrepriseId()] = [];
-            foreach ($entreprise->fields as $attribut => $getter) {
+        $data = [];
+
+        /** @var SocieteActionSimplifie $entreprise */
+        foreach ($this->entreprises as $key => $entreprise) {
+            $data[$this->entreprise->getEntrepriseId()] = [];
+            foreach ($entreprise as $attribut => $getter) {
                 if(array_key_exists($attribut, $entreprise->fields)) {
                     $data[$entreprise->getEntrepriseId()][$attribut] = $entreprise->$getter();
                 }
             }
 
-            // L'impôt est uniquement calculé, et n'est jamais stocké
             $data[$entreprise->getEntrepriseId()]['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
         }
         echo json_encode($data);

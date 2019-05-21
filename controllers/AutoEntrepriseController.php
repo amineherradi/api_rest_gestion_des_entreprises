@@ -8,7 +8,10 @@ class AutoEntrepriseController extends RestController
 {
     /** @var AutoEntreprise $entreprise */
     private $entreprise;
+    /** @var AutoEntreprise $entreprises */
+    private $entreprises;
 
+    /** @param $id */
     public function getDetail_request($id)
     {
         $this->entreprise = new AutoEntreprise;
@@ -16,12 +19,9 @@ class AutoEntrepriseController extends RestController
 
         $data = [];
         foreach ($this->entreprise as $attribut => $getter) {
-            if(array_key_exists($attribut, $this->entreprise->fields)) {
-                $data[$attribut] = $this->entreprise->$getter();
-            }
+            $data[$attribut] = $this->entreprise->$getter();
         }
 
-        // L'impôt est uniquement calculé, et n'est jamais stocké
         $data['impot'] = $this->entreprise->getChiffreAffaire() * $this->entreprise::TAUX;
         echo json_encode($data);
     }
@@ -29,10 +29,11 @@ class AutoEntrepriseController extends RestController
     public function getAll_request()
     {
         $data = [];
-        $entreprises = new AutoEntreprise;
-        $entreprises = $entreprises->getAll();
+        $this->entreprises = new AutoEntreprise;
+        $this->entreprises = $this->entreprises->getAll();
 
-        foreach ($entreprises as $key => $entreprise) {
+        /** @var AutoEntreprise $entreprise */
+        foreach ($this->entreprises as $key => $entreprise) {
             $data[$entreprise->getEntrepriseId()] = [];
             foreach ($entreprise->fields as $attribut => $getter) {
                 if(array_key_exists($attribut, $entreprise->fields)) {
@@ -40,7 +41,6 @@ class AutoEntrepriseController extends RestController
                 }
             }
 
-            // L'impôt est uniquement calculé, et n'est jamais stocké
             $data[$entreprise->getEntrepriseId()]['impot'] = $entreprise->getChiffreAffaire() * $entreprise::TAUX;
         }
         echo json_encode($data);
