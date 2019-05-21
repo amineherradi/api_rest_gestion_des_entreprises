@@ -1,9 +1,14 @@
 <?php
 
+use Controllers\AutoEntrepriseController;
+
 require_once './config/config.php';
 foreach ($entities as $key => $entity) {
     require_once './controllers/'.$entity.'Controller.php';
 }
+
+/** @var string|AutoEntrepriseController $entityController */
+$entityController = "";
 
 if (isset($_GET['entity']) && in_array($_GET['entity'], $entities)) {
     $entityController = $_GET['entity'].'Controller';
@@ -29,11 +34,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if ((isset($_GET['action']) && isset($_GET['id'])) && ($_GET['action'] == 'update' && $_GET['id'] != '')) {
             $patch = file_get_contents('php://input');
             $patch = urldecode($patch);
-            $patch = explode("&", $patch); 
+            $patch = explode("&", $patch);
 
             foreach ($patch as $key => $value) {
                 $value = explode("=", $value);
-                $_PATCH[$value[0]] = $value[1]; 
+                $_PATCH[$value[0]] = $value[1];
             }
 
             $entityController->update_request($_GET['id'], $_PATCH);
