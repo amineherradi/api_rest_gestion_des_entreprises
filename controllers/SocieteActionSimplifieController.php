@@ -11,7 +11,7 @@ class SocieteActionSimplifieController extends RestController
     /** @var SocieteActionSimplifie $entreprises */
     private $entreprises;
 
-    public function getDetail_request($id)
+    public function getDetailRequest($id)
     {
         $this->entreprise = new SocieteActionSimplifie;
         $this->entreprise = $this->entreprise->getOne($id);
@@ -26,7 +26,7 @@ class SocieteActionSimplifieController extends RestController
         echo json_encode($data);
     }
 
-    public function getAll_request()
+    public function getAllRequest()
     {
         $this->entreprises = new SocieteActionSimplifie;
         $this->entreprises = $this->entreprise->getAll();
@@ -47,7 +47,7 @@ class SocieteActionSimplifieController extends RestController
         echo json_encode($data);
     }
 
-    public function add_request($post = [])
+    public function addRequest($post = [])
     {
         $entreprise = new SocieteActionSimplifie($post);
         if ($entreprise->add()) {
@@ -55,7 +55,7 @@ class SocieteActionSimplifieController extends RestController
         }
     }
 
-    public function update_request($id, $patch)
+    public function updateRequest($id, $patch)
     {
         $entreprise = new SocieteActionSimplifie($patch);
         if ($entreprise->update($id)){
@@ -63,7 +63,7 @@ class SocieteActionSimplifieController extends RestController
         }
     }
 
-    public function delete_request($id)
+    public function deleteRequest($id)
     {
         $entreprise = new SocieteActionSimplifie;
         if ($entreprise->delete($id)) {

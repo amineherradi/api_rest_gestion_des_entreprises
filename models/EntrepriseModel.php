@@ -37,7 +37,7 @@ abstract class Entreprise extends ModelsManager
      */
     public function setEntrepriseId($id): void
     {
-        if ($this->isValidId($id)){
+        if ($this->isValidId($id)) {
             $this->entrepriseId = $id;
         } else {
             throw new Exception("Entreprise Id not valid", 1);

@@ -12,7 +12,7 @@ class AutoEntrepriseController extends RestController
     private $entreprises;
 
     /** @param $id */
-    public function getDetail_request($id)
+    public function getDetailRequest($id)
     {
         $this->entreprise = new AutoEntreprise;
         $this->entreprise = $this->entreprise->getOne($id);
@@ -26,7 +26,7 @@ class AutoEntrepriseController extends RestController
         echo json_encode($data);
     }
 
-    public function getAll_request()
+    public function getAllRequest()
     {
         $data = [];
         $this->entreprises = new AutoEntreprise;
@@ -46,7 +46,7 @@ class AutoEntrepriseController extends RestController
         echo json_encode($data);
     }
 
-    public function add_request($post = [])
+    public function addRequest($post = [])
     {
         $entreprise = new AutoEntreprise($post);
         if ($entreprise->add()) {
@@ -54,7 +54,7 @@ class AutoEntrepriseController extends RestController
         }
     }
 
-    public function update_request($id, $post)
+    public function updateRequest($id, $post)
     {
         $entreprise = new AutoEntreprise($post);
         if ($entreprise->update($id)){
@@ -62,7 +62,7 @@ class AutoEntrepriseController extends RestController
         }
     }
 
-    public function delete_request($id)
+    public function deleteRequest($id)
     {
         $entreprise = new AutoEntreprise;
         if ($entreprise->delete($id)) {
