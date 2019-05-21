@@ -36,7 +36,7 @@ class AutoEntrepriseController extends RestController
         foreach ($this->entreprises as $key => $entreprise) {
             $data[$entreprise->getEntrepriseId()] = [];
             foreach ($entreprise->fields as $attribut => $getter) {
-                if(array_key_exists($attribut, $entreprise->fields)) {
+                if (array_key_exists($attribut, $entreprise->fields)) {
                     $data[$entreprise->getEntrepriseId()][$attribut] = $entreprise->$getter();
                 }
             }
@@ -57,7 +57,7 @@ class AutoEntrepriseController extends RestController
     public function updateRequest($id, $post)
     {
         $entreprise = new AutoEntreprise($post);
-        if ($entreprise->update($id)){
+        if ($entreprise->update($id)) {
             echo "L'entreprise a bien été modifiée";
         }
     }

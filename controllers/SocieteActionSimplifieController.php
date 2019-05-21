@@ -21,7 +21,6 @@ class SocieteActionSimplifieController extends RestController
             $data[$attribut] = $this->entreprise->$getter();
         }
 
-        // L'impôt est uniquement calculé, et n'est jamais stocké
         $data['impot'] = $this->entreprise->getChiffreAffaire() * $this->entreprise::TAUX;
         echo json_encode($data);
     }
@@ -37,7 +36,7 @@ class SocieteActionSimplifieController extends RestController
         foreach ($this->entreprises as $key => $entreprise) {
             $data[$this->entreprise->getEntrepriseId()] = [];
             foreach ($entreprise as $attribut => $getter) {
-                if(array_key_exists($attribut, $entreprise->fields)) {
+                if (array_key_exists($attribut, $entreprise->fields)) {
                     $data[$entreprise->getEntrepriseId()][$attribut] = $entreprise->$getter();
                 }
             }
@@ -58,7 +57,7 @@ class SocieteActionSimplifieController extends RestController
     public function updateRequest($id, $patch)
     {
         $entreprise = new SocieteActionSimplifie($patch);
-        if ($entreprise->update($id)){
+        if ($entreprise->update($id)) {
             echo "L'entreprise a bien été modifiée";
         }
     }
