@@ -3,7 +3,7 @@
 use Controllers\AutoEntrepriseController;
 use Controllers\SocieteActionSimplifieController;
 
-require_once 'autoloader.php';
+require_once '../vendor/autoload.php';
 
 /** @var string|AutoEntrepriseController|SocieteActionSimplifieController $entityController */
 $entityController = "";
