@@ -1,13 +1,11 @@
 <?php
 
 use Controllers\AutoEntrepriseController;
+use Controllers\SocieteActionSimplifieController;
 
-require_once './config/config.php';
-foreach ($entities as $key => $entity) {
-    require_once './controllers/'.$entity.'Controller.php';
-}
+require_once 'autoloader.php';
 
-/** @var string|AutoEntrepriseController $entityController */
+/** @var string|AutoEntrepriseController|SocieteActionSimplifieController $entityController */
 $entityController = "";
 
 if (isset($_GET['entity']) && in_array($_GET['entity'], $entities)) {
@@ -18,15 +16,15 @@ if (isset($_GET['entity']) && in_array($_GET['entity'], $entities)) {
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if ((isset($_GET['action']) && isset($_GET['id'])) && ($_GET['action'] == 'detail' && $_GET['id'] != '')) {
-            $entityController->getDetail_request($_GET['id']);
+            $entityController->getDetailRequest($_GET['id']);
         } elseif ((isset($_GET['action']) && !isset($_GET['id'])) && $_GET['action'] == 'all') {
-            $entityController->getAll_request();
+            $entityController->getAllRequest();
         }
         break;
 
     case 'POST':
         if ((isset($_GET['action']) && !isset($_GET['id'])) && $_GET['action'] == 'add') {
-            $entityController->add_request($_POST);
+            $entityController->addRequest($_POST);
         }
         break;
 
@@ -42,13 +40,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $_PATCH[$value[0]] = $value[1];
             }
 
-            $entityController->update_request($_GET['id'], $_PATCH);
+            $entityController->updateRequest($_GET['id'], $_PATCH);
         }
         break;
 
     case 'DELETE':
         if ((isset($_GET['action']) && isset($_GET['id'])) && ($_GET['action'] == 'delete' && $_GET['id'] != '')) {
-            $entityController->delete_request($_GET['id']);
+            $entityController->deleteRequest($_GET['id']);
         }
         break;
 }

@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use Models\AutoEntreprise;
-use phpDocumentor\Reflection\Types\Integer;
 
 class AutoEntrepriseController extends RestController
 {
@@ -12,10 +11,10 @@ class AutoEntrepriseController extends RestController
     /** @var AutoEntreprise $entreprises */
     private $entreprises;
 
-    /** @param Integer $id */
-    public function getDetailRequest(Integer $id): void
+    /** @param int $id */
+    public function getDetailRequest(int $id): void
     {
-        $this->entreprise = new AutoEntreprise;
+        $this->entreprise = new AutoEntreprise();
         $this->entreprise = $this->entreprise->getOne($id);
 
         $data = [];
@@ -30,7 +29,7 @@ class AutoEntrepriseController extends RestController
     public function getAllRequest(): void
     {
         $data = [];
-        $this->entreprises = new AutoEntreprise;
+        $this->entreprises = new AutoEntreprise();
         $this->entreprises = $this->entreprises->getAll();
 
         /** @var AutoEntreprise $entreprise */
@@ -57,10 +56,10 @@ class AutoEntrepriseController extends RestController
     }
 
     /**
-     * @param Integer $id
+     * @param int $id
      * @param $post
      */
-    public function updateRequest(Integer $id, $post): void
+    public function updateRequest(int $id, $post): void
     {
         $entreprise = new AutoEntreprise($post);
         if ($entreprise->update($id)) {
@@ -68,10 +67,10 @@ class AutoEntrepriseController extends RestController
         }
     }
 
-    /** @param Integer $id */
-    public function deleteRequest(Integer $id): void
+    /** @param int $id */
+    public function deleteRequest(int $id): void
     {
-        $entreprise = new AutoEntreprise;
+        $entreprise = new AutoEntreprise();
         if ($entreprise->delete($id)) {
             echo "L'entreprise a bien été supprimée";
         }

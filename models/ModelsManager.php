@@ -31,10 +31,10 @@ class ModelsManager
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return bool;
      */
-    public function getOne($id)
+    public function getOne(int $id)
     {
         return ($id)? true : false;
     }
@@ -61,20 +61,20 @@ class ModelsManager
     }
 
     /**
-     * @param Integer $id
+     * @param int $id
      * @return bool
      */
-    public function update(Integer $id)
+    public function update(int $id)
     {
 
         return ($id)? true : false;
     }
 
     /**
-     * @param Integer $id
+     * @param int $id
      * @return int
      */
-    public function delete(Integer $id)
+    public function delete(int $id)
     {
         return ($id)? true : false;
     }

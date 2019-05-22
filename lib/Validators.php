@@ -5,10 +5,10 @@ namespace Lib;
 trait Validators
 {
     /**
-     * @param String $value
+     * @param string $value
      * @return bool
      */
-    protected function isValidAddress(String $value): bool
+    protected function isValidAddress(string $value): bool
     {
         $is_valid = true;
         if (!is_string($value) || $value == '') {
@@ -18,10 +18,10 @@ trait Validators
     }
 
     /**
-     * @param String $value
+     * @param string $value
      * @return bool
      */
-    protected function isValidSiret(String $value): bool
+    protected function isValidSiret(string $value): bool
     {
         $is_valid = true;
         if (!is_string($value) || $value == '') {
@@ -31,10 +31,10 @@ trait Validators
     }
 
     /**
-     * @param String $value
+     * @param string $value
      * @return bool
      */
-    protected function isValidDenomination(String $value): bool
+    protected function isValidDenomination(string $value): bool
     {
         $is_valid = true;
         if (!is_string($value) || $value == '') {

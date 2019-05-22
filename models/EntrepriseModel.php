@@ -4,7 +4,6 @@ namespace Models;
 
 use Exception;
 use Lib\Validators;
-use phpDocumentor\Reflection\Types\Integer;
 
 abstract class Entreprise extends ModelsManager
 {
@@ -70,10 +69,10 @@ abstract class Entreprise extends ModelsManager
     }
 
     /**
-     * @param $denomination
+     * @param string $denomination
      * @throws Exception
      */
-    public function setDenomination($denomination): void
+    public function setDenomination(string $denomination): void
     {
         if ($this->isValidDenomination($denomination)) {
             $this->denomination = $denomination;
@@ -89,10 +88,10 @@ abstract class Entreprise extends ModelsManager
     }
 
     /**
-     * @param $chiffre_affaire
+     * @param float $chiffre_affaire
      * @throws Exception
      */
-    public function setChiffreAffaire($chiffre_affaire): void
+    public function setChiffreAffaire(float $chiffre_affaire): void
     {
         if ($this->isValidChiffreAffaire($chiffre_affaire)) {
             $this->chiffreAffaire = $chiffre_affaire;
@@ -111,7 +110,7 @@ abstract class Entreprise extends ModelsManager
      * @param float $taux
      * @return void
      */
-    public function setTaux($taux): void
+    public function setTaux(float $taux): void
     {
         $this->taux = $taux;
     }
@@ -119,10 +118,10 @@ abstract class Entreprise extends ModelsManager
     // Mes surcharges
 
     /**
-     * @param Integer $id
+     * @param int $id
      * @return bool
      */
-    public function getOne($id): bool
+    public function getOne(int $id): bool
     {
         return ($id) ? true : false;
     }
@@ -133,7 +132,7 @@ abstract class Entreprise extends ModelsManager
      */
     public function getSelected(array $ids = []): array
     {
-        return ($ids)? [] : [];
+        return ($ids) ? [] : [];
     }
 
     /** @return array */
@@ -143,19 +142,19 @@ abstract class Entreprise extends ModelsManager
     }
 
     /**
-     * @param Integer $id
+     * @param int $id
      * @return bool
      */
-    public function update(Integer $id): bool
+    public function update(int $id): bool
     {
         return ($id)? true : false;
     }
 
     /**
-     * @param Integer $id
+     * @param int $id
      * @return bool
      */
-    public function delete(Integer $id): bool
+    public function delete(int $id): bool
     {
         return ($id)? true : false;
     }

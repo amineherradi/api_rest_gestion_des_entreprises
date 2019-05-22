@@ -36,10 +36,10 @@ class SocieteActionSimplifie extends Entreprise
     }
 
     /**
-     * @param $adresseSiegeSocial
+     * @param string $adresseSiegeSocial
      * @throws Exception
      */
-    public function setAdresseSiegeSociale($adresseSiegeSocial): void
+    public function setAdresseSiegeSociale(string $adresseSiegeSocial): void
     {
         if ($this->isValidAddress($adresseSiegeSocial)) {
             $this->adresseSiegeSocial = $adresseSiegeSocial;

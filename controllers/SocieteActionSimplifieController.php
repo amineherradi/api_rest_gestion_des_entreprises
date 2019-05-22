@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use Models\SocieteActionSimplifie;
-use phpDocumentor\Reflection\Types\Integer;
 
 class SocieteActionSimplifieController extends RestController
 {
@@ -12,10 +11,10 @@ class SocieteActionSimplifieController extends RestController
     /** @var SocieteActionSimplifie $entreprises */
     private $entreprises;
 
-    /** @param $id */
-    public function getDetailRequest($id): void
+    /** @param int $id */
+    public function getDetailRequest(int $id): void
     {
-        $this->entreprise = new SocieteActionSimplifie;
+        $this->entreprise = new SocieteActionSimplifie();
         $this->entreprise = $this->entreprise->getOne($id);
 
         $data = [];
@@ -29,7 +28,7 @@ class SocieteActionSimplifieController extends RestController
 
     public function getAllRequest(): void
     {
-        $this->entreprises = new SocieteActionSimplifie;
+        $this->entreprises = new SocieteActionSimplifie();
         $this->entreprises = $this->entreprise->getAll();
 
         $data = [];
@@ -58,10 +57,10 @@ class SocieteActionSimplifieController extends RestController
     }
 
     /**
-     * @param Integer $id
+     * @param int $id
      * @param $patch
      */
-    public function updateRequest(Integer $id, $patch): void
+    public function updateRequest(int $id, $patch): void
     {
         $entreprise = new SocieteActionSimplifie($patch);
         if ($entreprise->update($id)) {
@@ -69,10 +68,10 @@ class SocieteActionSimplifieController extends RestController
         }
     }
 
-    /** @param Integer $id */
-    public function deleteRequest(Integer $id): void
+    /** @param int $id */
+    public function deleteRequest(int $id): void
     {
-        $entreprise = new SocieteActionSimplifie;
+        $entreprise = new SocieteActionSimplifie();
         if ($entreprise->delete($id)) {
             echo "L'entreprise a bien été supprimée";
         }
