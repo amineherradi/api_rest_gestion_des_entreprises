@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 require 'config/config.php';
-require 'lib/Validators.php';
+require 'lib/ValidatorsTrait.php';
 
 require 'models/ModelsManager.php';
 require 'models/EntrepriseModel.php';
