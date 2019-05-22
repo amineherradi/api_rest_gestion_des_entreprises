@@ -14,7 +14,7 @@ class ModelsManager
 
     protected function setDb()
     {
-        $this->db = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+        $this->db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
     }
 
     /**
@@ -36,7 +36,7 @@ class ModelsManager
      */
     public function getOne(int $id)
     {
-        return ($id)? true : false;
+        return ($id) ? true : false;
     }
 
     /**
@@ -45,7 +45,7 @@ class ModelsManager
      */
     public function getSelected(array $ids = [])
     {
-        return ($ids)? [] :[];
+        return ($ids) ? [] : [];
     }
 
     /** @return array */
@@ -67,7 +67,7 @@ class ModelsManager
     public function update(int $id)
     {
 
-        return ($id)? true : false;
+        return ($id) ? true : false;
     }
 
     /**
@@ -76,6 +76,6 @@ class ModelsManager
      */
     public function delete(int $id)
     {
-        return ($id)? true : false;
+        return ($id) ? true : false;
     }
 }

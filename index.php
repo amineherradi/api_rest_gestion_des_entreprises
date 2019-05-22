@@ -8,11 +8,6 @@ require_once 'autoloader.php';
 /** @var string|AutoEntrepriseController|SocieteActionSimplifieController $entityController */
 $entityController = "";
 
-if (isset($_GET['entity']) && in_array($_GET['entity'], $entities)) {
-    $entityController = $_GET['entity'].'Controller';
-    $entityController = new $entityController;
-}
-
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if ((isset($_GET['action']) && isset($_GET['id'])) && ($_GET['action'] == 'detail' && $_GET['id'] != '')) {

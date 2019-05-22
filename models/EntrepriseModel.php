@@ -147,7 +147,7 @@ abstract class Entreprise extends ModelsManager
      */
     public function update(int $id): bool
     {
-        return ($id)? true : false;
+        return ($id) ? true : false;
     }
 
     /**
@@ -156,6 +156,6 @@ abstract class Entreprise extends ModelsManager
      */
     public function delete(int $id): bool
     {
-        return ($id)? true : false;
+        return ($id) ? true : false;
     }
 }
