@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers;
+namespace Api\Controllers;
 
-use Models\AutoEntreprise;
+use Api\Models\AutoEntreprise;
 
 class AutoEntrepriseController extends RestController
 {

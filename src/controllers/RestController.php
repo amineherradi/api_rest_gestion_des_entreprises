@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers;
+namespace Api\Controllers;
 
 class RestController
 {

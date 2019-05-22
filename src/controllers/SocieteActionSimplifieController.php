@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers;
+namespace Api\Controllers;
 
-use Models\SocieteActionSimplifie;
+use Api\Models\SocieteActionSimplifie;
 
 class SocieteActionSimplifieController extends RestController
 {

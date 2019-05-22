@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace Api\Models;
 
 use Exception;
 

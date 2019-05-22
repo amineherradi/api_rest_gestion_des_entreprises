@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib;
+namespace Api\Lib;
 
 trait Validators
 {

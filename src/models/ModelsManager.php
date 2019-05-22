@@ -1,9 +1,8 @@
 <?php
 
-namespace Models;
+namespace Api\Models;
 
 use PDO;
-use phpDocumentor\Reflection\Types\Integer;
 
 class ModelsManager
 {

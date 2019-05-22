@@ -1,9 +1,6 @@
 <?php
 
-namespace Models;
-
-use Exception;
-use Lib\Validators;
+namespace Api\Models;
 
 abstract class Entreprise extends ModelsManager
 {
