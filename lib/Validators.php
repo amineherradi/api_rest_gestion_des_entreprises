@@ -4,7 +4,11 @@ namespace Lib;
 
 trait Validators
 {
-    protected function isValidAddress($value)
+    /**
+     * @param String $value
+     * @return bool
+     */
+    protected function isValidAddress(String $value): bool
     {
         $is_valid = true;
         if (!is_string($value) || $value == '') {
@@ -12,7 +16,12 @@ trait Validators
         }
         return $is_valid;
     }
-    protected function isValidSiret($value)
+
+    /**
+     * @param String $value
+     * @return bool
+     */
+    protected function isValidSiret(String $value): bool
     {
         $is_valid = true;
         if (!is_string($value) || $value == '') {
@@ -20,7 +29,12 @@ trait Validators
         }
         return $is_valid;
     }
-    protected function isValidDenomination($value)
+
+    /**
+     * @param String $value
+     * @return bool
+     */
+    protected function isValidDenomination(String $value): bool
     {
         $is_valid = true;
         if (!is_string($value) || $value == '') {
@@ -28,7 +42,12 @@ trait Validators
         }
         return $is_valid;
     }
-    protected static function isValidChiffreAffaire($value)
+
+    /**
+     * @param float $value
+     * @return bool
+     */
+    protected static function isValidChiffreAffaire(float $value): bool
     {
         $is_valid = true;
         if (!is_float($value) || $value == '') {
@@ -37,7 +56,12 @@ trait Validators
 
         return $is_valid;
     }
-    protected static function isValidId($value)
+
+    /**
+     * @param int $value
+     * @return bool
+     */
+    protected static function isValidId(int $value): bool
     {
         $is_valid = true;
         if (!is_integer($value) || $value == '') {
