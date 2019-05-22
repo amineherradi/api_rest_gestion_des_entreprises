@@ -1,7 +1,7 @@
 <?php
 
-use Controllers\AutoEntrepriseController;
-use Controllers\SocieteActionSimplifieController;
+use Api\Controllers\AutoEntrepriseController;
+use Api\Controllers\SocieteActionSimplifieController;
 
 require_once '../vendor/autoload.php';
 
