@@ -1,20 +1,12 @@
 <?php
 
-namespace Api\Models;
+namespace Api\Repository;
 
-use PDO;
+use Api\Lib\PdoTrait;
 
-class ModelsManager
+class EntrepriseRepository
 {
-    /** @var PDO $db */
-    protected $db;
-    /** @var string $tableName */
-    protected $tableName;
-
-    protected function setDb()
-    {
-        $this->db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
-    }
+    use PdoTrait;
 
     /**
      * @param $object
@@ -23,8 +15,8 @@ class ModelsManager
     public function getAttributesOf($object)
     {
         $entity = [];
-        foreach ($object as $attribut => $value) {
-            $entity[$attribut] = $value;
+        foreach ($object as $property => $value) {
+            $entity[$property] = $value;
         }
         return $entity;
     }
