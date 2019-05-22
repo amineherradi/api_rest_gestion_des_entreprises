@@ -2,6 +2,8 @@
 
 namespace Api\Models;
 
+use Api\Lib\Validators;
+
 abstract class Entreprise extends ModelsManager
 {
     use Validators;
