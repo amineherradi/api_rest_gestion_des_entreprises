@@ -3,8 +3,9 @@
 namespace Api\Models;
 
 use Api\Lib\Validators;
+use Exception;
 
-abstract class Entreprise extends ModelsManager
+abstract class Entreprise
 {
     use Validators;
 
@@ -112,49 +113,5 @@ abstract class Entreprise extends ModelsManager
     public function setTaux(float $taux): void
     {
         $this->taux = $taux;
-    }
-
-    // Mes surcharges
-
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function getOne(int $id): bool
-    {
-        return ($id) ? true : false;
-    }
-
-    /**
-     * @param array $ids
-     * @return array
-     */
-    public function getSelected(array $ids = []): array
-    {
-        return ($ids) ? [] : [];
-    }
-
-    /** @return array */
-    public function getAll(): array
-    {
-        return [];
-    }
-
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function update(int $id): bool
-    {
-        return ($id) ? true : false;
-    }
-
-    /**
-     * @param int $id
-     * @return bool
-     */
-    public function delete(int $id): bool
-    {
-        return ($id) ? true : false;
     }
 }

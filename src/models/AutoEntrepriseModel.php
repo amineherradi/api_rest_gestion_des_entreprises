@@ -13,7 +13,6 @@ class AutoEntreprise extends Entreprise
      */
     public function __construct(array $data = [])
     {
-        $this->tableName = $this::TABLE_NAME;
         if (!empty($data)) {
             $this->entrepriseId   = (isset($data['entreprise_id'])) ? $data['entreprise_id'] : "";
             $this->siret          = $data['siret'];

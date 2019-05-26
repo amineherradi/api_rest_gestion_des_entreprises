@@ -9,6 +9,7 @@ trait PdoTrait
     /** @var PDO $db */
     protected $db;
 
+    /** @return PDO */
     protected function getPdoInstance()
     {
         return new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
