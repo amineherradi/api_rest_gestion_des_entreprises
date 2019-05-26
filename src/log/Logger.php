@@ -13,6 +13,4 @@ class Logger implements LoggerInterface
     {
         // TODO: Implement log() method.
     }
-
-
 }
